@@ -1,9 +1,8 @@
-creating repo
-b'Initialized empty Git repository in /Users/emily/.texttest/tmp/ph.24Nov094627.37133/ph/happy_path/git-phlow-systest-workon_repo/.git/\n'
-b''
-created repo
 Preparing workspace...
-An issue with number: 1 could not be found on GitHub 
-check that it exists or that you have access to it on GitHub
-list_issue
-deleting repo
+json: cannot unmarshal object into Go value of type []plugins.Label
+
+-------- Issue #2 updated --------  
+Label    => Status - in progress 
+Assignee => @emilybache 
+----------------------------------
+fatal: 'origin/master' is not a commit and a branch '2-foobar2' cannot be created from it

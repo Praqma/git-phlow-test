@@ -1,5 +1,6 @@
 # Full path to the System Under Test (or Java Main Class name)
-executable:${TEXTTEST_CHECKOUT}/src/test_workon.sh
+executable:${TEXTTEST_CHECKOUT}/src/usecase.py
+interpreter:python3
 
 # Naming scheme to use for files for stdin,stdout and stderr
 filename_convention_scheme:standard
@@ -10,7 +11,15 @@ full_name:git-phlow
 link_test_path:${TEXTTEST_CHECKOUT}/src
 
 create_catalogues:true
+config_module:default
 
 [run_dependent_text]
-stdout:{INTERNAL writedir}
+log:{INTERNAL writedir}
+log:^(t=)\d+{REPLACE \1timestamp}
+log:(issue\s)\d+{REPLACE \1number}
+stdout:(Issue\s#)\d+{REPLACE \1number}
+[end]
+
+[collate_file]
+log:usecase.log
 [end]
