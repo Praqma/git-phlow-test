@@ -1,25 +1,34 @@
 $ git clone https://github.com/praqma-test/git-phlow-systest-workon_repo
 
-$ git-phlow workon 34
+$ git-phlow workon 35
 Preparing workspace...
 
--------- Issue #34 updated --------  
+-------- Issue #35 updated --------  
 Label    => Status - in progress 
 Assignee => @emilybache 
 ----------------------------------
-Created workspace:  34-issue_title
+Created workspace:  35-issue_title
 $ git branch
-* 34-issue_title
+* 35-issue_title
   master
-$ touch 34-issue_title.txt
+$ touch 35-issue_title.txt
 
 $ git add .
 
-$ git-phlow wrapup 34
-close #34 issue_title
+$ git-phlow wrapup 35
+close #35 issue_title
 $ git branch
-* 34-issue_title
+* 35-issue_title
   master
 $ git log --oneline --name-only -1
-e054772 close #34 issue_title
-34-issue_title.txt
+7b00a45 close #35 issue_title
+35-issue_title.txt
+$ git-phlow deliver 35
+delivering...
+Delivered branch 35-issue_title
+$ git branch
+delivered/35-issue_title
+* master
+$ git log --oneline --name-only -1
+13aa4db initial import
+README.md

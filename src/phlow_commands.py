@@ -33,3 +33,15 @@ def usecase_wrapup(repo, local_clone, issue_number):
     local_clone.log_last_commit()
     repo.log_my_issue(issue_number)
 
+def usecase_deliver(repo, local_clone, issue_number):
+    # Arrange
+
+    # Act
+    log_cmd_output("deliver", ["git-phlow", "deliver", issue_number], cwd=local_clone.directory)
+
+    # Assert
+    local_clone.log_branches()
+    local_clone.log_last_commit()
+    repo.log_my_issue(issue_number)
+
+

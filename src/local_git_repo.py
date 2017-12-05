@@ -51,6 +51,10 @@ class GitHubRepo:
             if assignee:
                 assignee = assignee.login
             self.logger.info("assignee for issue %s: %s", issue_number, assignee)
+            state = my_issue[0].state
+            self.logger.info("state for issue %s: %s", issue_number, state)
+            labels = [label.name for label in my_issue[0].labels]
+            self.logger.info("labels for issue %s: %s", issue_number, labels)
         else:
             self.logger.warn("no issue found with number %s", issue_number)
 

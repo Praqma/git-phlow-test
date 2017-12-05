@@ -24,7 +24,7 @@ stdout:\d+(-issue_title){REPLACE number\1}
 stdout:(Assignee => @)[\w_-]+{REPLACE \1github_username}
 stdout:^[\d\w]+(\sclose #){REPLACE <hash>\1}
 stdout:(close #)\d+{REPLACE \1number}
-stdout:(workon|wrapup) \d+{REPLACE \1 number}
+stdout:(workon|wrapup|deliver) \d+{REPLACE \1 number}
 [end]
 
 [collate_file]
