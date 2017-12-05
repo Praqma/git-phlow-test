@@ -1,78 +1,35 @@
 
 import logging, os, subprocess, json
 import github
+from cmd_wrapper import cmd_output, log_cmd_output
+from local_git_repo import GitHubRepo
 
-def usecase_workon(repo_name):
-    # Arrange
-    logging.info("workon usecase")
-    repo = GitHubRepo("praqma-test", repo_name)
-    clone_directory = repo.create_local_clone()
-    issue_number = repo.create_issue("issue-name")
+def usecase_workon(repo):
+    # Arrange - clone the remote repo
+    logging.info("preparing for workon")
+    local_clone = repo.create_local_clone()
+    issue_number = repo.create_issue("issue_title")
     repo.log_my_issue(issue_number)
 
     # Act
-    output = _cmd_output(["git-phlow", "workon", issue_number], cwd=clone_directory)
+    log_cmd_output("workon", ["git-phlow", "workon", issue_number], cwd=local_clone.directory)
     
     # Assert
-    print(output)
-    logging.info("branches:\n%s", _cmd_output(["git", "branch"], cwd=clone_directory))
-    my_issues = repo.log_my_issue(issue_number)
+    local_clone.log_branches()
+    repo.log_my_issue(issue_number)
+    return local_clone, issue_number
 
 
-class GitHubRepo:
-    def __init__(self, repo_owner, repo_name):
-        self.repo_owner = repo_owner
-        self.repo_name = repo_name
-        self.gh = _github()
+def usecase_wrapup(repo, local_clone, issue_number):
+    # Arrange - make a commit in the issue branch
+    logging.info("preparing for wrapup")
+    local_clone.add_local_changes(issue_number, "issue_title")
 
-    def _remote_name(self):
-        return f"https://github.com/{self.repo_owner}/{self.repo_name}"
-
-    def create_local_clone(self):
-        cmd = ["git", "clone", self._remote_name()]
-        logging.info(_cmd_output(cmd))
-
-        logging.info("created local clone of %s", self.repo_name)
-        return os.path.join(os.getcwd(), self.repo_name)
-
-
-    def create_issue(self, title, body=None):
-        issue = self.gh.repos('praqma-test')(self.repo_name).issues().post(title=title, body=body)
-        issue_number = issue["number"]
-        return str(issue_number)
-
-    def list_issues(self, **kwargs): 
-        return self.gh.repos(self.repo_owner)(self.repo_name).issues().get(**kwargs)
-
-    def log_my_issue(self, issue_number):
-        my_issue = self.list_issues(number=issue_number)
-        if my_issue:
-            assignee = my_issue[0].assignee
-            if assignee:
-                assignee = assignee.login
-            logging.info("assignee for issue %s: %s", issue_number, assignee)
-        else:
-            logging.warn("no issue found with number %s", issue_number)
-
-
-
-def _github():
-    cmd = ["git", "config", "--global", "--get"]
-    username = _cmd_output(cmd + ["phlow.user"])
-    token = _cmd_output(cmd + ["phlow.token"])
-    gh = github.GitHub(username=username, password=token)
-    gh.username = username
-    return gh
-
-
-
-def create_local_repo(repo_name):
-    os.mkdir(repo_name)
-    logging.info(subprocess.check_output(["git", "init"], cwd=repo_name))
-
-
-def _cmd_output(cmd, cwd=None):
-    if cwd is None:
-        cwd = os.getcwd()
-    return subprocess.check_output(cmd, cwd=cwd).strip().decode("UTF-8")
+    # Act
+    log_cmd_output("wrapup", ["git-phlow", "wrapup", issue_number], cwd=local_clone.directory)
+    
+    # Assert
+    local_clone.log_branches()
+    local_clone.log_last_commit()
+    repo.log_my_issue(issue_number)
 

@@ -1,9 +1,14 @@
-t=125 root INFO - usecase with repo git-phlow-systest-workon_repo and workon
-t=125 root INFO - workon usecase
-t=961 root INFO - 
-t=962 root INFO - created local clone of git-phlow-systest-workon_repo
-t=3383 root INFO - assignee for issue 15: None
-t=5779 root INFO - branches:
-* 15-issue-name
-  master
-t=6496 root INFO - assignee for issue 15: emilybache
+t=163 root INFO - usecase with repo git-phlow-systest-workon_repo
+t=163 root INFO - preparing for workon
+t=163 root INFO - creating local clone
+t=3879 GitHubRepo INFO - assignee for issue 32: None
+t=3879 root INFO - workon
+t=6355 root INFO - listing branches
+t=8706 GitHubRepo INFO - assignee for issue 32: emilybache
+t=8707 root INFO - preparing for wrapup
+t=8707 root INFO - creating local changes
+t=8713 root INFO - adding local changes
+t=8724 root INFO - wrapup
+t=10028 root INFO - listing branches
+t=10038 root INFO - log last commit
+t=11533 GitHubRepo INFO - assignee for issue 32: emilybache

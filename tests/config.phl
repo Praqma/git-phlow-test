@@ -10,19 +10,21 @@ full_name:git-phlow
 
 link_test_path:${TEXTTEST_CHECKOUT}/src
 
-create_catalogues:true
+create_catalogues:false
 config_module:default
 
 [run_dependent_text]
 log:{INTERNAL writedir}
 log:^(t=)\d+{REPLACE \1timestamp}
 log:(issue\s)\d+{REPLACE \1number}
-stdout:(Issue\s#)\d+{REPLACE \1number}
-log:\d+(-issue-name){REPLACE number\1}
-stdout:\d+(-issue-name){REPLACE number\1}
-catalogue:\d+(-issue-name){REPLACE number\1}
+log:\d+(-issue_title){REPLACE number\1}
 log:(assignee for issue number: )[\w_-]+{REPLACE \1github_username}
+stdout:(Issue\s#)\d+{REPLACE \1number}
+stdout:\d+(-issue_title){REPLACE number\1}
 stdout:(Assignee => @)[\w_-]+{REPLACE \1github_username}
+stdout:^[\d\w]+(\sclose #){REPLACE <hash>\1}
+stdout:(close #)\d+{REPLACE \1number}
+stdout:(workon|wrapup) \d+{REPLACE \1 number}
 [end]
 
 [collate_file]
