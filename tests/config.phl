@@ -18,6 +18,11 @@ log:{INTERNAL writedir}
 log:^(t=)\d+{REPLACE \1timestamp}
 log:(issue\s)\d+{REPLACE \1number}
 stdout:(Issue\s#)\d+{REPLACE \1number}
+log:\d+(-issue-name){REPLACE number\1}
+stdout:\d+(-issue-name){REPLACE number\1}
+catalogue:\d+(-issue-name){REPLACE number\1}
+log:(assignee for issue number: )[\w_-]+{REPLACE \1github_username}
+stdout:(Assignee => @)[\w_-]+{REPLACE \1github_username}
 [end]
 
 [collate_file]

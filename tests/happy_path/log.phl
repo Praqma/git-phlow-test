@@ -1,7 +1,9 @@
-t=122 root INFO - usecase with repo git-phlow-systest-workon_repo and workon
-t=122 root INFO - workon usecase
-t=757 root INFO - 
-t=757 root INFO - created local clone of git-phlow-systest-workon_repo
-t=1432 root INFO - assignee for issue 2: None
-t=3965 root INFO - branches: 
-t=4565 root INFO - assignee for issue 2: emilybache
+t=125 root INFO - usecase with repo git-phlow-systest-workon_repo and workon
+t=125 root INFO - workon usecase
+t=961 root INFO - 
+t=962 root INFO - created local clone of git-phlow-systest-workon_repo
+t=3383 root INFO - assignee for issue 15: None
+t=5779 root INFO - branches:
+* 15-issue-name
+  master
+t=6496 root INFO - assignee for issue 15: emilybache

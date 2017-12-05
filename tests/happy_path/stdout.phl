@@ -1,8 +1,7 @@
 Preparing workspace...
-json: cannot unmarshal object into Go value of type []plugins.Label
 
--------- Issue #2 updated --------  
+-------- Issue #13 updated --------  
 Label    => Status - in progress 
 Assignee => @emilybache 
 ----------------------------------
-fatal: 'origin/master' is not a commit and a branch '2-foobar2' cannot be created from it
+Created workspace:  13-issue-name

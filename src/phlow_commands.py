@@ -1,5 +1,5 @@
 
-import logging, os, subprocess
+import logging, os, subprocess, json
 import github
 
 def usecase_workon(repo_name):
@@ -7,7 +7,7 @@ def usecase_workon(repo_name):
     logging.info("workon usecase")
     repo = GitHubRepo("praqma-test", repo_name)
     clone_directory = repo.create_local_clone()
-    issue_number = repo.create_issue("foobar")
+    issue_number = repo.create_issue("issue-name")
     repo.log_my_issue(issue_number)
 
     # Act
@@ -15,7 +15,7 @@ def usecase_workon(repo_name):
     
     # Assert
     print(output)
-    logging.info("branches: %s", _cmd_output(["git", "branch"], cwd=clone_directory))
+    logging.info("branches:\n%s", _cmd_output(["git", "branch"], cwd=clone_directory))
     my_issues = repo.log_my_issue(issue_number)
 
 
@@ -38,9 +38,10 @@ class GitHubRepo:
 
     def create_issue(self, title, body=None):
         # having trouble using the api to create issues, hard-coding issue number for now
-        issue_number = "3"
-        #self.gh.repos('praqma-test')(self.repo_name).issues().post(title=title, body=body)
-        return issue_number
+        issue_resp = self.gh.repos('praqma-test')(self.repo_name).issues().post(title=title, body=body)
+        #print(json.dumps(issue_resp, indent=4))
+        issue_number = issue_resp["number"]
+        return str(issue_number)
 
     def list_issues(self, **kwargs): 
         return self.gh.repos(self.repo_owner)(self.repo_name).issues().get(**kwargs)
