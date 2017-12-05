@@ -37,10 +37,8 @@ class GitHubRepo:
 
 
     def create_issue(self, title, body=None):
-        # having trouble using the api to create issues, hard-coding issue number for now
-        issue_resp = self.gh.repos('praqma-test')(self.repo_name).issues().post(title=title, body=body)
-        #print(json.dumps(issue_resp, indent=4))
-        issue_number = issue_resp["number"]
+        issue = self.gh.repos('praqma-test')(self.repo_name).issues().post(title=title, body=body)
+        issue_number = issue["number"]
         return str(issue_number)
 
     def list_issues(self, **kwargs): 
@@ -71,6 +69,7 @@ def _github():
 def create_local_repo(repo_name):
     os.mkdir(repo_name)
     logging.info(subprocess.check_output(["git", "init"], cwd=repo_name))
+
 
 def _cmd_output(cmd, cwd=None):
     if cwd is None:
