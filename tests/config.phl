@@ -8,8 +8,6 @@ filename_convention_scheme:standard
 # Expanded name to use for application
 full_name:git-phlow
 
-link_test_path:${TEXTTEST_CHECKOUT}/src
-
 create_catalogues:false
 config_module:default
 
