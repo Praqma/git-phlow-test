@@ -19,4 +19,9 @@ You also need full access to the test repositories we have set up on github:
 
 	- https://github.com/praqma-test/git-phlow-systest-workon_repo	
 
-Then you can select and run test cases in the GUI.
+Then you can select and run test cases in the GUI. If you prefer to run using the command line, use this command:
+
+	$> texttest -d $PWD/tests -c $PWD -b default
+
+This will produce a report under target/default.xxxxxx/junitreport that Jenkins will understand. If the test fails and you want to inspect what happened, you will find TextTest's sandbox directory under target/default.xxxx/phl, containing the files produced during the test run.
+

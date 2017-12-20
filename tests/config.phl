@@ -11,6 +11,9 @@ full_name:git-phlow
 create_catalogues:false
 config_module:default
 
+default_texttest_tmp:target
+batch_junit_format:true
+
 [run_dependent_text]
 log:{INTERNAL writedir}
 log:^(t=)\d+{REPLACE \1timestamp}
